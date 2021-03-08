@@ -3,7 +3,7 @@
 # Installation and Getting Started
 
 ## Donation Alerts
-- Download this repository by clicking [here]()
+- Download this repository by clicking [here](https://github.com/OverAcheiever/Rally-OBS-Alerts-and-Activity-Feed/archive/main.zip)
 - Extract the zip file to a safe location on your PC. [Installing [WinRar](https://www.win-rar.com/postdownload.html?&L=0) would help with this step if not already installed]
 - In OBS, add a new Browser Source by checking the Local file checkbox and then navigating to the location where you extracted the folder and selecting **Activity Feed**. Then click OK.
 - Navigate to the location where you extracted the zip file to and find a file named **Settings.json**
