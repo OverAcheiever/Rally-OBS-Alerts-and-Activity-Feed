@@ -181,7 +181,7 @@
             justify-content: center;
         }
 
-        #reset button {
+        #reset button{
             position: relative;
             width: 50%;
             height: 30px;
@@ -194,7 +194,25 @@
             font-size: 15px;
             margin-left: 8%;
         }
-
+        #submit{
+            height: 50px;
+            display:flex !important;
+            align-items: center;
+            justify-content: center;
+        }
+        #submit button{
+            font-family: montserrat;
+            font-weight: 700;
+            font-size: 15px;
+            margin-left: 8%;
+            position: relative;
+            width: 40%;
+            height: 30px;
+            color: #fafafa;
+            background-color: red;
+            border-radius: 20px;
+            margin-top: -10px;
+        }
     </style>
     <script>
         let donationList = [];
@@ -411,7 +429,11 @@
                     type="text" value="#FFA500"></div>
             <div class="settings-item">Message Color <span style="padding-left: 5px"> &#8594;</span> <input id="color2"
                     style="padding: 0 5px 0 5px; margin-left: 5px; height: 20px; width: 20%;margin-right: 5px; line-height: 10px;"
-                    type="text" value="#ffffff"></div>
+                    type="text" value="#ffffff">
+                </div>
+                <div class="settings-item" id='submit'>
+                    <button>SUBMIT</button>
+                </div>
             <!--<div class="settings-item">Text Top Padding <span style="padding-left: 5px"> &#8594;</span> <input
                     id="padding"
                     style="padding: 0 5px 0 5px; margin-left: 5px; height: 20px; width: 20%;margin-right: 5px; line-height: 10px;"
