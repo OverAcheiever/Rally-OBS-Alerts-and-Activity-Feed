@@ -6,7 +6,7 @@
 - Download this repository by clicking [here]()
 - Extract the zip file to a safe location on your PC. [Installing [WinRar](https://www.win-rar.com/postdownload.html?&L=0) would help with this step if not already installed]
 - In OBS, add a new Browser Source by checking the Local file checkbox and then navigating to the location where you extracted the folder and selecting **Activity Feed**. Then click OK.
-- After Setting up the Activity Feed following the below instructions, change the Creator Coin under the Activity Feed Settings. Additional visual customisation can be found there
+- After Setting up the Activity Feed following the below instructions, change the Creator Coin under the Activity Feed Settings. Additional visual customisation can be found there (Note: Any changes made to the custom fields only register when you click outside the field. The Alerts browser source needs to be reloaded for changes to be seen)
 ## Activity Feed
 - In OBS, navigate to **Top Menu → View → Docks → Custom Browser Docks**
 - Navigate to extracted folder and right click on **Activity Feed**. Click on properties which opens up a new window. Copy the location from here
