@@ -26,8 +26,7 @@
             min-width: 285px;
             height: max-content;
             background-color: #333;
-            font-weight: 800;
-            /* border: 5px solid #e5e5e5; */
+            font-weight: 800; 
         }
 
         .label {
@@ -122,8 +121,8 @@
             z-index: 999;
             color: #fafafa;
             padding: 10px;
-            opacity: 0;
-            display: none;
+            /*opacity: 0;
+            display: none;*/
         }
 
         .settings h3 {
@@ -148,13 +147,13 @@
             color: #333;
             padding: 5px;
             display: flex;
-            font-size: 20px;
+            font-size: 15px;
             border-bottom: 5px solid red;
             box-sizing: border-box;
         }
 
         #coinName {
-            height: 70px;
+            height: 55px;
             top: 100px;
             flex-direction: column;
             justify-content: center;
@@ -165,7 +164,7 @@
             height: max-content !important;
             margin-left: 5px;
             margin-right: 5px;
-            margin-top: -20px;
+            margin-top: -18px;
             width: 100%;
             font-family: montserrat;
             font-weight: 700;
@@ -184,7 +183,7 @@
 
         #reset button {
             position: relative;
-            width: 30%;
+            width: 50%;
             height: 30px;
             margin-top: -10px;
             color: #fefefe;
@@ -193,8 +192,7 @@
             font-family: montserrat;
             font-weight: 700;
             font-size: 15px;
-            margin-left: 10%;
-            margin-right: 10%;
+            margin-left: 8%;
         }
 
     </style>
@@ -236,7 +234,7 @@
                             true,
                             0,
                             0
-                        );
+                        );  
                     } else {
                         addDonation(
                             data.data.fromUsername,
@@ -251,19 +249,8 @@
         });
 
         window.addEventListener("load", () => {
-            coinName = document.querySelector('#coinName input').value;
-            if (localStorage.data) {
-                donationList = localStorage.data.split(",");
-                for (item in donationList) {
-                    let data = donationList[item].split(";");
-                    addDonation(data[0], data[1], false, data[2], data[3]);
-                }
-            }
-            if (localStorage.coin) {
-                coinName = localStorage.coin
-                document.querySelector('#coinName input').value = coinName;
-            }
-            listeners();
+            coinName = localStorage.coin;
+            listeners()
         });
 
         function addDonation(name, amount, state, d, t) {
@@ -319,6 +306,22 @@
             }
         }
         function listeners() {
+            /*if(localStorage.image){
+                document.querySelector('#image').value = localStorage.image;
+            }*/
+            if(localStorage.color1){
+                document.querySelector('#color1').value = localStorage.color1;
+            }
+            if(localStorage.color2){
+                document.querySelector('#color2').value = localStorage.color2;
+            }
+            /*if(localStorage.padding){
+                document.querySelector('#padding').value = localStorage.padding;
+            }*/
+            if(localStorage.coin){
+                document.querySelector('#coinName input').value = localStorage.coin;
+            }
+
             document.querySelector('.settings-logo button').addEventListener("click", () => {
                 if (document.querySelector('.settings').style.opacity != 1) {
                     document.querySelector('.settings').style.opacity = 1;
@@ -335,14 +338,30 @@
                 document.querySelector('.feed').innerHTML = "";
             })
 
-            document.querySelector('#test').addEventListener("click", () => {
-                addDonation("Test", 100, false, '', '')
-            })
-
             document.querySelector('#coinName input').addEventListener('change', (event) => {
                 coinName = event.target.value;
                 localStorage.setItem("coin", coinName);
             });
+
+            /*document.querySelector('#image').addEventListener('change', (event) => {
+                localStorage.setItem("image", event.target.value)
+                console.log(localStorage)
+            });*/
+
+            document.querySelector('#color1').addEventListener('change', (event) => {
+                localStorage.setItem("color1", event.target.value)
+                console.log(localStorage)
+            });
+
+            document.querySelector('#color2').addEventListener('input', (event) => {
+                localStorage.setItem("color2", event.target.value)
+                console.log(localStorage)
+            });
+
+            /*document.querySelector('#padding').addEventListener('input', (event) => {
+                localStorage.setItem("padding", event.target.value)
+                console.log(localStorage)
+            });*/
         }
 
         setInterval(function () {
@@ -380,9 +399,23 @@
                 <p>COIN SYMBOL <span>&#8594;</span></p><br><input value="SKOT">
             </div>
             <div class="settings-item" id="reset">
-                <button id="reset-button">RESET FEED</button>
-                <button id="test">TEST TIP</button>
+                <button id="reset-button">RESET</button>
             </div>
+            <h3 class="settings-item"
+                style="border: 0px solid; background-color: rgba(0,0,0,0); font-size: 20px; margin-top:10px">Alert
+                Settings <span style="padding-left: 5px"> &#8594;</span></h3>
+            <!--<div class="settings-item">Image <span style="padding-left: 5px"> &#8594;</span> <input id="image"
+                    style="padding-left: 5px; margin-left: 5px;" type="text" ></div>-->
+            <div class="settings-item">Username Color<span style="padding-left: 5px"> &#8594;</span> <input id="color1"
+                    style="padding: 0 5px 0 5px; margin-left: 5px; height: 20px; width: 20%;margin-right: 5px; line-height: 10px;"
+                    type="text" value="#FFA500"></div>
+            <div class="settings-item">Message Color <span style="padding-left: 5px"> &#8594;</span> <input id="color2"
+                    style="padding: 0 5px 0 5px; margin-left: 5px; height: 20px; width: 20%;margin-right: 5px; line-height: 10px;"
+                    type="text" value="#ffffff"></div>
+            <!--<div class="settings-item">Text Top Padding <span style="padding-left: 5px"> &#8594;</span> <input
+                    id="padding"
+                    style="padding: 0 5px 0 5px; margin-left: 5px; height: 20px; width: 20%;margin-right: 5px; line-height: 10px;"
+                    type="text" value="-20"></div>-->
         </div>
 
     </div>

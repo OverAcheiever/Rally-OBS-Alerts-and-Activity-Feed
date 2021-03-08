@@ -75,7 +75,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js"
         integrity="sha512-B4skI5FiLurS86aioJx9VfozI1wjqrn6aTdJH+YQUmCZum/ZibPBTX55k5d9XM6EsKePDInkLVrN7vPmJxc1qA=="
         crossorigin="anonymous"></script>
-    <script src="./Settings.json"></script>
     <script>
         // Global Variables
         let amount = 0;
@@ -91,10 +90,6 @@
          setInterval(function () {
             
         });*/
-        $.getJSON("Settings.json", function (json) {
-            coinName = json.coinName
-            console.log(json.coinSymbol)
-        });
 
         socket.onclose = function () {
             setInterval(function () {
@@ -125,6 +120,24 @@
             }
         });
 
+        window.addEventListener("load", () => {
+            if(localStorage.coin){
+                coinName = localStorage.coin;
+            }
+            /*opacityif(localStorage.image){
+                document.getElementById('img').style.backgroundImage = 'url(' + localStorage.image + ')';
+            }*/
+            if(localStorage.color1){
+                document.querySelector('.username').style.color = localStorage.color1;
+            }
+            if(localStorage.color2){
+                document.querySelector('.message').style.color = localStorage.color2;
+            }
+            /*if(localStorage.padding){
+                document.querySelector('.video-container').style.paddingTop = String(localStorage.padding) + 'px';
+            }*/
+        });
+
         //Alerts
         function Alert(event) {
             console.log("ALERTS: Playing Alert");
@@ -151,12 +164,13 @@
             location.reload();
         }, 1000 * 60 * 15);
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
 </head>
 
 <body>
     <div class="alert-container">
         <div class="video-container">
-            <div class='img'></div>
+            <div class='img' id="img"></div>
         </div>
         <div class="text-container">
             <div class="username" id="username">OverAchiever</div>
