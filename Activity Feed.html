@@ -1,5 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE
+    html>
+<html
+    lang="en">
 
 <head>
 
@@ -11,19 +13,21 @@
             "wss://rally-alerts-server.herokuapp.com/rally/alerts/websocket"
         );
 
-        // Reconnect on Close
-        socket.addEventListener("close", () => {
-            console.log("Reconnecting to Server");
+        socket.onopen = function (event) {
+            function isOpen(ws) {
+                return ws.readyState === ws.OPEN;
+            }
             setInterval(function () {
-
-            });
-        });
-
-        socket.addEventListener("open", (event) => {
-            setInterval(function () {
-                socket.send("Hello Server!");
-            }, 20000);
-        });
+                if (!isOpen(socket)) {
+                    new WebSocket(
+                        "wss://rally-alerts-server.herokuapp.com/rally/alerts/websocket"
+                    );
+                }
+                else {
+                    socket.send("Keep Alive");
+                }
+            }, 5000);
+        };
 
         // Listen to Data
         socket.addEventListener("message", (event) => {
@@ -57,6 +61,7 @@
         });
 
         window.addEventListener("load", () => {
+            listeners();
             $('head').append(
                 `
                 <style>
@@ -72,7 +77,7 @@
             background-color: #333;
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
-            min-width: 285px;
+            min-width: 285px !important;
         }
 
         ::-webkit-scrollbar {
@@ -86,6 +91,7 @@
             height: max-content;
             background-color: #333;
             font-weight: 800;
+            display: inline-block   
         }
 
         .label {
@@ -139,12 +145,13 @@
         .item {
             width: 100%;
             min-height: 50px;
-            height: max-content;
+            /*height: max-content;*/
             position: relative;
             background-color: #000;
             margin-bottom: 5px;
             border-right: 5px solid red;
             padding: 5px;
+            display: inline-block   
         }
 
         .tip-info {
@@ -290,7 +297,6 @@
                     addDonation(data[0], data[1], false, data[2], data[3]);
                 }
             }
-            listeners();
         });
 
         function addDonation(name, amount, state, d, t) {
@@ -344,6 +350,10 @@
             `
                 );
             }
+            let item = document.querySelectorAll('.item')
+            for (i in item) {
+                item[i].style.minHeight = `50px`
+            }
         }
         function listeners() {
             /*if(localStorage.image){
@@ -381,6 +391,7 @@
             document.querySelector('#coinName input').addEventListener('change', (event) => {
                 coinName = event.target.value;
                 localStorage.setItem("coin", coinName);
+                console.log(coinName)
             });
 
             /*document.querySelector('#image').addEventListener('change', (event) => {
@@ -411,41 +422,85 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="label">
-            <p>ACTIVITY FEED</p>
-            <div class="settings-logo">
-                <button onclick="">
-                    <i class="fas fa-cog"></i>
+    <div
+        class="container">
+        <div
+            class="label">
+            <p>ACTIVITY
+                FEED
+            </p>
+            <div
+                class="settings-logo">
+                <button
+                    onclick="">
+                    <i
+                        class="fas fa-cog"></i>
                 </button>
             </div>
         </div>
-        <div class="feed">
+        <div
+            class="feed">
         </div>
     </div>
     </div>
-    <div class="settings">
-        <h3>Settings &#8594;</h3>
-        <div class="settings-flex">
-            <div class="settings-item" id="coinName">
-                <p>COIN SYMBOL <span>&#8594;</span></p><br><input value="SKOT">
+    <div
+        class="settings">
+        <h3>Settings
+            &#8594;
+        </h3>
+        <div
+            class="settings-flex">
+            <div class="settings-item"
+                id="coinName">
+                <p>COIN
+                    SYMBOL
+                    <span>&#8594;</span>
+                </p>
+                <br><input
+                    value="SKOT">
             </div>
-            <div class="settings-item" id="reset">
-                <button id="reset-button">RESET</button>
+            <div class="settings-item"
+                id="reset">
+                <button
+                    id="reset-button">RESET</button>
             </div>
             <h3 class="settings-item"
-                style="border: 0px solid; background-color: rgba(0,0,0,0); font-size: 20px; margin-top:10px">Alert
-                Settings <span style="padding-left: 5px"> &#8594;</span></h3>
+                style="border: 0px solid; background-color: rgba(0,0,0,0); font-size: 20px; margin-top:10px">
+                Alert
+                Settings
+                <span
+                    style="padding-left: 5px">
+                    &#8594;</span>
+            </h3>
             <!--<div class="settings-item">Image <span style="padding-left: 5px"> &#8594;</span> <input id="image"
                     style="padding-left: 5px; margin-left: 5px;" type="text" ></div>-->
-            <div class="settings-item">Username Color<span style="padding-left: 5px"> &#8594;</span> <input id="color1"
+            <div
+                class="settings-item">
+                Username
+                Color<span
+                    style="padding-left: 5px">
+                    &#8594;</span>
+                <input
+                    id="color1"
                     style="padding: 0 5px 0 5px; margin-left: 5px; height: 20px; width: 20%;margin-right: 5px; line-height: 10px;"
-                    type="text" value="#FFA500"></div>
-            <div class="settings-item">Message Color <span style="padding-left: 5px"> &#8594;</span> <input id="color2"
-                    style="padding: 0 5px 0 5px; margin-left: 5px; height: 20px; width: 20%;margin-right: 5px; line-height: 10px;"
-                    type="text" value="#ffffff">
+                    type="text"
+                    value="#FFA500">
             </div>
-            <div class="settings-item" id='submit'>
+            <div
+                class="settings-item">
+                Message
+                Color
+                <span
+                    style="padding-left: 5px">
+                    &#8594;</span>
+                <input
+                    id="color2"
+                    style="padding: 0 5px 0 5px; margin-left: 5px; height: 20px; width: 20%;margin-right: 5px; line-height: 10px;"
+                    type="text"
+                    value="#ffffff">
+            </div>
+            <div class="settings-item"
+                id='submit'>
                 <button>SUBMIT</button>
             </div>
             <!--<div class="settings-item">Text Top Padding <span style="padding-left: 5px"> &#8594;</span> <input
@@ -455,11 +510,15 @@
         </div>
 
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js"
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js"
         integrity="sha512-B4skI5FiLurS86aioJx9VfozI1wjqrn6aTdJH+YQUmCZum/ZibPBTX55k5d9XM6EsKePDInkLVrN7vPmJxc1qA=="
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
 </body>
 
 </html>
