@@ -104,11 +104,15 @@
         };
 
         socket.onopen = function (event) {
-            function isOpen(ws) {
+            
+        };
+        function isOpen(ws) {
                 return ws.readyState === ws.OPEN;
             }
             setInterval(function () {
                 if (!isOpen(socket)) {
+                    console.log("Reconnecting")
+                    location.reload();
                     new WebSocket(
                         "wss://rally-alerts-server.herokuapp.com/rally/alerts/websocket"
                     );
@@ -117,7 +121,6 @@
                     socket.send("Keep Alive");
                 }
             }, 5000);
-        };
         // Listen to Data
         socket.addEventListener("message", (event) => {
             socket.send("Received!");
