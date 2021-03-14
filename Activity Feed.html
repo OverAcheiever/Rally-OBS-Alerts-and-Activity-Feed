@@ -137,7 +137,7 @@
         }
 
         .settings h3 {
-            color: rgb(255, 30, 30);
+            color: #fff;
             padding-bottom: 8px;
         }
 
@@ -154,12 +154,11 @@
         .settings-item {
             width: 100%;
             margin-bottom: 5px;
-            background-color: #fafafa;
+            background-color: #fff;
             color: #333;
             padding: 5px;
             display: flex;
             font-size: 15px;
-            border-bottom: 5px solid red;
             box-sizing: border-box;
         }
 
@@ -184,6 +183,12 @@
             text-align: center;
         }
 
+        .settings-item:nth-child(2){
+            display:flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         #reset {
             color: #333;
             height: 50px;
@@ -195,6 +200,7 @@
         #reset button {
             position: relative;
             width: 50%;
+            max-width: 200px;
             height: 30px;
             margin-top: -10px;
             color: #fefefe;
@@ -203,7 +209,6 @@
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             font-size: 15px;
-            margin-left: 8%;
         }
 
         #submit {
@@ -217,9 +222,9 @@
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             font-size: 15px;
-            margin-left: 8%;
             position: relative;
-            width: 40%;
+            width: 50%;
+            max-width: 200px;
             height: 30px;
             color: #fafafa;
             background-color: red;
