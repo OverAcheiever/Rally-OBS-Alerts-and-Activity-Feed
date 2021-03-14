@@ -4,71 +4,7 @@
     lang="en">
 
 <head>
-
-    <script>
-        let donationList = [];
-        let coinName = '';
-        // Initialise WebSocket Connection to Server
-        const socket = new WebSocket(
-            "wss://rally-alerts-server.herokuapp.com/rally/alerts/websocket"
-        );
-
-        socket.onopen = function (event) {
-
-        };
-
-        function isOpen(ws) {
-                return ws.readyState === ws.OPEN;
-            }
-            setInterval(function () {
-                if (!isOpen(socket)) {
-                    console.log("Reconnecting")
-                    location.reload();
-                    new WebSocket(
-                        "wss://rally-alerts-server.herokuapp.com/rally/alerts/websocket"
-                    );
-                }
-                else {
-                    socket.send("Keep Alive");
-                }
-            }, 5000);
-
-        // Listen to Data
-        socket.addEventListener("message", (event) => {
-            socket.send("Received!");
-            if (event.data.slice(0, 1) !== "{") {
-                console.log("SERVER: ", event.data);
-            } else {
-                if (JSON.parse(event.data).coinKind == coinName) {
-                    console.log("Donation Receieved");
-                    let data = JSON.parse(event.data);
-                    data.data.costInUSCents = data.data.costInUSCents / 100
-                    if (data.data.costInUSCents >= 1) {
-                        addDonation(
-                            data.data.fromUsername,
-                            Math.trunc(data.data.costInUSCents),
-                            true,
-                            0,
-                            0
-                        );
-                    } else {
-                        addDonation(
-                            data.data.fromUsername,
-                            String(data.data.costInUSCents).slice(0, 4),
-                            true,
-                            0,
-                            0
-                        );
-                    }
-                }
-            }
-        });
-
-        window.addEventListener("load", () => {
-            listeners();
-            $('head').append(
-                `
-                <style>
+    <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap');
 
         * {
@@ -95,7 +31,7 @@
             height: max-content;
             background-color: #333;
             font-weight: 800;
-            display: inline-block   
+            display: inline-block
         }
 
         .label {
@@ -155,7 +91,7 @@
             margin-bottom: 5px;
             border-right: 5px solid red;
             padding: 5px;
-            display: inline-block   
+            display: inline-block
         }
 
         .tip-info {
@@ -290,8 +226,68 @@
         }
 
     </style>
-                `
-            )
+    <script>
+        let donationList = [];
+        let coinName = '';
+        // Initialise WebSocket Connection to Server
+        const socket = new WebSocket(
+            "wss://rally-alerts-server.herokuapp.com/rally/alerts/websocket"
+        );
+
+        socket.onopen = function (event) {
+
+        };
+
+        function isOpen(ws) {
+            return ws.readyState === ws.OPEN;
+        }
+        setInterval(function () {
+            if (!isOpen(socket)) {
+                console.log("Reconnecting")
+                location.reload();
+                new WebSocket(
+                    "wss://rally-alerts-server.herokuapp.com/rally/alerts/websocket"
+                );
+            }
+            else {
+                socket.send("Keep Alive");
+            }
+        }, 5000);
+
+        // Listen to Data
+        socket.addEventListener("message", (event) => {
+            socket.send("Received!");
+            if (event.data.slice(0, 1) !== "{") {
+                console.log("SERVER: ", event.data);
+            } else {
+                if (JSON.parse(event.data).coinKind == coinName) {
+                    console.log("Donation Receieved");
+                    let data = JSON.parse(event.data);
+                    data.data.costInUSCents = data.data.costInUSCents / 100
+                    if (data.data.costInUSCents >= 1) {
+                        addDonation(
+                            data.data.fromUsername,
+                            Math.trunc(data.data.costInUSCents),
+                            true,
+                            0,
+                            0
+                        );
+                    } else {
+                        addDonation(
+                            data.data.fromUsername,
+                            String(data.data.costInUSCents).slice(0, 4),
+                            true,
+                            0,
+                            0
+                        );
+                    }
+                }
+            }
+        });
+
+        window.addEventListener("load", () => {
+            listeners();
+
             coinName = document.querySelector('#coinName input').value;
             console.log(coinName);
             if (localStorage.length > 0) {
@@ -353,10 +349,6 @@
             </div>    
             `
                 );
-            }
-            let item = document.querySelectorAll('.item')
-            for (i in item) {
-                item[i].style.minHeight = `50px`
             }
         }
         function listeners() {
