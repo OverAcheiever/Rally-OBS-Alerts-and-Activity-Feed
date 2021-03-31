@@ -156,10 +156,14 @@
         //Alerts
         function Alert(event) {
             console.log("ALERTS: Playing Alert");
-
+            console.log(String(JSON.parse(event.data).data.amountOfCoin))
             document.querySelector(".username").innerHTML = JSON.parse(event.data).data.fromUsername;
+            if(String(JSON.parse(event.data).data.amountOfCoin.toFixed(2)).slice(-3) == '.00'){
+                document.querySelector(".amount").innerHTML = String(JSON.parse(event.data).data.amountOfCoin).slice(0,-3)
+            }
+            else{
             document.querySelector(".amount").innerHTML = JSON.parse(event.data).data.amountOfCoin.toFixed(2);
-
+            }
             gsap
                 .timeline()
                 .fromTo(".img", { opacity: 0 }, { opacity: 1 })
