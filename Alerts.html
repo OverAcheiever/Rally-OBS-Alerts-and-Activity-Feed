@@ -137,26 +137,20 @@
         });
 
         window.addEventListener("load", () => {
-            console.log(localStorage)
-            localStorage.setItem("coin", "SKOT");
-            localStorage.setItem("color2", "#FFA500")
-            localStorage.setItem("color2", "#fafafa")
+
             if (localStorage.coin) {
                 coinName = localStorage.coin;
                 document.querySelector('.coin').innerHTML = coinName;
             }
-            /*opacityif(localStorage.image){
-                document.getElementById('img').style.backgroundImage = 'url(' + localStorage.image + ')';
-            }*/
             if (localStorage.color1) {
                 document.querySelector('.username').style.color = localStorage.color1;
             }
             if (localStorage.color2) {
                 document.querySelector('.message').style.color = localStorage.color2;
             }
-            /*if(localStorage.padding){
-                document.querySelector('.video-container').style.paddingTop = String(localStorage.padding) + 'px';
-            }*/
+            if(false){
+                console.log('Hi')
+            }
         });
 
         //Alerts
